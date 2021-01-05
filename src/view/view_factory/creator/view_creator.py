@@ -1,0 +1,3 @@
+
+class ViewCreator:
+    pass
