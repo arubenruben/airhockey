@@ -3,12 +3,9 @@ import pygame
 
 class GameController:
 
-    def __init__(self, gameModel, gameView):
-        self.gameModel = gameModel
+    def __init__(self, menuState, gameView):
+        self.menuState = menuState
         self.gameView = gameView
 
     def run(self):
-        while True:
-            ev = pygame.event.poll()
-            if ev.type == pygame.QUIT:
-                break
+        self.menuState.run(self.gameView)

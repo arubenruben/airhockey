@@ -1,0 +1,2 @@
+class Drawable:
+    pass
