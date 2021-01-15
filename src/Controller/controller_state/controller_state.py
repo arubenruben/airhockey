@@ -9,6 +9,5 @@ class ControllerState:
     def run(self):
         pass
 
-    # TODO: State de saida FAZER PARA FICAR CODIGO LIMPO
     def changeToExitState(self):
-        pass
+        self.controller.running = False

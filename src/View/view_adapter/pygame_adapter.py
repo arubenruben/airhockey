@@ -4,7 +4,7 @@ from src.Model.drawables.concreteDrawables.button import Button
 from src.Model.drawables.genericDrawables.font import Font
 from src.Model.drawables.genericDrawables.image import Image
 from src.Model.drawables.genericDrawables.rectangle import Rectangle
-from src.View.events.concrete_events.mouse_events.mouse_event import MouseEvent
+from src.View.events.concrete_events.mouse_events.concrete_mouse_events.mouse_left_click_event import MouseLeftClick
 from src.View.events.concrete_events.quit_event import QuitEvent
 from src.View.pygame_view_strategy.concreteStrategies.button_strategy import ButtonStrategy
 from src.View.pygame_view_strategy.concreteStrategies.font_strategy import FontStrategy
@@ -31,6 +31,9 @@ class PygameAdapter(View):
         return self._fontRender
 
     def draw(self, model):
+        blackRGB = (0, 0, 0)
+
+        self._screenRender.fill(blackRGB)
 
         allElements = model.drawables
 
@@ -53,8 +56,8 @@ class PygameAdapter(View):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 formattedEvents.append(QuitEvent())
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                formattedEvents.append(MouseEvent(1, 1))
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                formattedEvents.append(MouseLeftClick(event.pos[0], event.pos[1]))
 
         return formattedEvents
 

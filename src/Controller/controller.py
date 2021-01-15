@@ -7,6 +7,7 @@ class Controller:
         self._model = model
         self._view = view
         self._state = StartState(self, GameStartObservable(self._model))
+        self._running = True
 
     @property
     def state(self):
@@ -30,6 +31,15 @@ class Controller:
     def view(self):
         return self._view
 
+    @property
+    def running(self):
+        return self._running
+
+    @running.setter
+    def running(self, running):
+        self._running = running
+
     def run(self):
-        while True:
+        while self.running:
             self._state.run()
+        self.view.exit()

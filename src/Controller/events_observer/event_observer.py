@@ -11,4 +11,4 @@ class EventObserver:
         self._action = action
 
     def update(self, event):
-        return self._action()
+        pass
