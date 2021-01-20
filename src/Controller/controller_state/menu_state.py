@@ -1,4 +1,4 @@
-class ControllerState:
+class MenuState:
     def __init__(self, controller):
         self._controller = controller
 
@@ -6,8 +6,11 @@ class ControllerState:
     def controller(self):
         return self._controller
 
-    def run(self):
+    def clickStart(self):
         pass
 
-    def changeToExitState(self):
-        self.controller.running = False
+    def clickQuit(self):
+        pass
+
+    def run(self):
+        pass

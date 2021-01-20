@@ -1,18 +1,20 @@
 from src.Controller.controller_state.concrete_states.game_state import GameState
-from src.Controller.controller_state.controller_state import ControllerState
-from src.View.events.concrete_events.mouse_events.mouse_event import MouseEvent
+from src.Controller.controller_state.menu_state import MenuState
+from src.Controller.events_observer.event_managers.event_manager import EventManager
 
 
-class StartState(ControllerState):
+class StartState(MenuState):
 
-    def __init__(self, controller, eventObservable):
+    def __init__(self, controller):
         super().__init__(controller)
-        self._eventObservable = eventObservable
-        self._eventObservable.subscribe(MouseEvent, controller.model.buttonPlay, self.changeToSGameState)
-        self._eventObservable.subscribe(MouseEvent, controller.model.buttonExit, self.changeToExitState)
+        self._eventManager = EventManager()
+        self._eventManager.attach(self.controller.model.buttonPlay)
+        self._eventManager.attach(self.controller.model.buttonExit)
 
     def run(self):
-        self._eventObservable.publish(self.controller.view.getEvents())
+        for event in self.controller.view.getEvents():
+            self._eventManager.notify(event)
+
         self.controller.view.draw(self.controller.model)
 
     def changeToSGameState(self):
