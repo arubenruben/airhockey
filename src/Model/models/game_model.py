@@ -1,4 +1,4 @@
-from src.Model.model import Model
+from src.Model.models.model import Model
 
 
 class GameModel(Model):

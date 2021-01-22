@@ -6,10 +6,10 @@ class MenuState:
     def controller(self):
         return self._controller
 
-    def clickStart(self):
+    def changeToSGameState(self):
         pass
 
-    def clickQuit(self):
+    def changeToExitState(self):
         pass
 
     def run(self):

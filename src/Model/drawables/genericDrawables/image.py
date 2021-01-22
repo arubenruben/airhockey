@@ -1,17 +1,16 @@
-class Image:
-    def __init__(self, filename, x, y):
+from src.Model.drawables.drawable import Drawable
+
+
+class Image(Drawable):
+    def __init__(self, position, dimensions, filename):
+        super().__init__(position)
         self._filename = filename
-        self._x = x
-        self._y = y
+        self._dimensions = dimensions
 
     @property
     def filename(self):
         return self._filename
 
     @property
-    def x(self):
-        return self._x
-
-    @property
-    def y(self):
-        return self._y
+    def dimensions(self):
+        return self._dimensions

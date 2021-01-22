@@ -4,9 +4,10 @@ from src.Model.drawables.concreteDrawables.button import Button
 from src.Model.drawables.genericDrawables.font import Font
 from src.Model.drawables.genericDrawables.image import Image
 from src.Model.drawables.genericDrawables.rectangle import Rectangle
+from src.Model.utils.dimensions import Dimensions
 from src.View.events.concrete_events.mouse_events.concrete_mouse_events.mouse_left_click_event import \
     MouseLeftClickEvent
-from src.View.events.concrete_events.quit_event import QuitEvent
+from src.View.events.concrete_events.quit_events.quit_event import QuitEvent
 from src.View.pygame_view_strategy.concreteStrategies.button_strategy import ButtonStrategy
 from src.View.pygame_view_strategy.concreteStrategies.font_strategy import FontStrategy
 from src.View.pygame_view_strategy.concreteStrategies.image_strategy import ImageStrategy
@@ -16,12 +17,12 @@ from src.View.view_adapter.view import View
 
 class PygameAdapter(View):
 
-    def __init__(self, width, height):
-        super().__init__(width, height)
+    def __init__(self, width, height, fontSize):
+        super().__init__(width, height, fontSize)
         pygame.init()
         pygame.font.init()
         self._screenRender = pygame.display.set_mode([width, height])
-        self._fontRender = pygame.font.SysFont(None, 30)
+        self._fontRender = pygame.font.SysFont(None, fontSize)
 
     @property
     def screenRender(self):
@@ -64,3 +65,6 @@ class PygameAdapter(View):
 
     def exit(self):
         pygame.quit()
+
+    def textDimensions(self, text):
+        return Dimensions(self._fontRender.size(text)[0], self._fontRender.size(text)[1])

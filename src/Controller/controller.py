@@ -1,25 +1,33 @@
-from src.Controller.controller_state.concrete_states.start_state import StartState
-from src.Controller.events_observer.event_managers.event_manager import EventManager
+from time import time, sleep
+
+from src.Controller.commands.changeToExitStateCommand import ChangeToExitStateCommand
+from src.Controller.controller_state.concrete_states.start_state.start_state import MenuStartState
 
 
 class Controller:
     def __init__(self, model, view):
         self._model = model
         self._view = view
-        self._menuState = StartState(self)
+        self._menuState = MenuStartState(self)
         self._running = True
 
     def run(self):
+        frameRate = 60
+        frameTime = 1 / frameRate
+
+        nextTimeStamp = self.getCurrentTimeStampInMilli()
+
         while self.running:
-            self._menuState.run()
+
+            currentTimeStamp = self.getCurrentTimeStampInMilli()
+
+            if nextTimeStamp < currentTimeStamp:
+                self._menuState.run()
+                nextTimeStamp = self.getCurrentTimeStampInMilli() + frameTime
+            else:
+                sleep((nextTimeStamp - currentTimeStamp) / 1000)
 
         self.view.exit()
-
-    def clickStart(self):
-        return self._menuState.clickStart()
-
-    def clickQuit(self):
-        return self._menuState.clickQuit()
 
     def changeState(self, newState):
         self._menuState = newState
@@ -47,3 +55,10 @@ class Controller:
     @property
     def view(self):
         return self._view
+
+    @property
+    def menuState(self):
+        return self._menuState
+
+    def getCurrentTimeStampInMilli(self):
+        return int(time() * 1000)
