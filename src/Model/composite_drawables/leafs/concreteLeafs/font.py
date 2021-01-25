@@ -1,12 +1,12 @@
-from src.Model.drawables.drawable import Drawable
+from src.Model.composite_drawables.leafs.leafComponent import LeafComponent
 
 
-class Font(Drawable):
+class Font(LeafComponent):
 
-    def __init__(self, position, color, text):
+    def __init__(self, position, text, color):
         super().__init__(position)
-        self._color = color
         self._text = text
+        self._color = color
 
     @property
     def text(self):

@@ -1,7 +1,7 @@
-from src.Model.drawables.drawable import Drawable
+from src.Model.composite_drawables.leafs.leafComponent import LeafComponent
 
 
-class Rectangle(Drawable):
+class Rectangle(LeafComponent):
     def __init__(self, position, dimensions, color):
         super().__init__(position)
         self._dimensions = dimensions

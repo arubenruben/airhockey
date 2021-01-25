@@ -1,7 +1,7 @@
-from src.Model.drawables.drawable import Drawable
+from src.Model.composite_drawables.leafs.leafComponent import LeafComponent
 
 
-class Image(Drawable):
+class Image(LeafComponent):
     def __init__(self, position, dimensions, filename):
         super().__init__(position)
         self._filename = filename
